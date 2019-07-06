@@ -1,4 +1,4 @@
-# liff-app-on-blazor
+# liff-client-csharp
 C# wrapper of LIFF client API for use in Blazor applications.
 
 ## Demo Site 
@@ -8,23 +8,19 @@ https://pierre3.github.io/liff-app-on-blazor/
 ## Usage
 
 ```cs
-public interface ILiff
+public interface ILiffClient
 {
     bool Initialized { get; }
     LiffData Data { get; }
-    string Error { get; }
     Profile Profile { get; }
 
-    event EventHandler<InitErrorEventArgs> InitError;
-    event EventHandler<InitSuccessEventArgs> InitSuccess;
-
-    Task CloseWindowAsync();
-    Task<string> GetAccessTokenAsync();
     Task InitializeAsync(IJSRuntime jSRuntime);
     Task LoadProfileAsync();
+    Task<string> GetAccessTokenAsync();
+    Task SendMessagesAsync(object messages);
+    Task CloseWindowAsync();
     Task OpenWindowAsync(string url, bool external);
     void Reset();
-    Task SendMessagesAsync(object messages);
 }
 ```
 
@@ -33,7 +29,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddSingleton<ILiff, Liff>();
+        services.AddSingleton<ILiffClient, LiffClient>();
     }
 
     public void Configure(IComponentsApplicationBuilder app)
@@ -45,13 +41,13 @@ public class Startup
 
 ```cshtml
 @page "/"
-@inject ILiff Liff
+@inject ILiffClient Liff
 @inject IJSRuntime JSRuntime
 
 <div class="card" style="width: 20rem;">
     @if (Liff.Profile != null)
     {
-    <img class="card-img" src="@Liff.Profile?.PictureUrl" alt="Loading image..." onload="@StateHasChanged" />
+    <img class="card-img" src="@Liff.Profile?.PictureUrl" alt="Loading image..." />
     <div class="card-body">
         <h5 class="card-title">@Liff.Profile?.DisplayName</h5>
         <p class="card-text">@Liff.Profile?.StatusMessage</p>
@@ -87,15 +83,10 @@ public class Startup
 
     protected override async Task OnInitAsync()
     {
-        await InitializeAsync();
-        await LoadProfileAsync();
-    }
-
-    private async Task InitializeAsync()
-    {
         try
         {
             await Liff.InitializeAsync(JSRuntime);
+            await Liff.LoadProfileAsync();
             StateHasChanged();
         }
         catch (Exception e)
