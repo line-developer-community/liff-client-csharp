@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineDC.Liff", "liff-client-csharp\LineDC.Liff.csproj", "{6C5BFD2D-8110-4F6F-8EA1-804170768186}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liff-client-csharp", "liff-client-csharp\liff-client-csharp.csproj", "{6C5BFD2D-8110-4F6F-8EA1-804170768186}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineDC.LiffOnBlazor", "liff-client-csharp-blazor\LineDC.LiffOnBlazor.csproj", "{F3115E9C-18EA-4757-9C04-DDEDC2A3D66D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liff-client-csharp-blazor", "liff-client-csharp-blazor\liff-client-csharp-blazor.csproj", "{F3115E9C-18EA-4757-9C04-DDEDC2A3D66D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

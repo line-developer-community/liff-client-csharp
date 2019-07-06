@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\liff-client-csharp\LineDC.Liff.csproj" />
+    <ProjectReference Include="..\liff-client-csharp\liff-client-csharp.csproj" />
   </ItemGroup>
 
 </Project>
