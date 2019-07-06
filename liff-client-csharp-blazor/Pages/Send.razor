@@ -1,0 +1,27 @@
+﻿@page "/send"
+@inject ILiffClient Liff
+@inject IJSRuntime JSRuntime
+
+<input class="form-control" type="text" @bind="@Message" placeholder="送信メッセージを入力してください。" />
+<button class="form-control btn btn-primary" onclick="@SendMessageAsync">送信</button>
+
+@functions{
+    private string Message { get; set; }
+
+    private async void SendMessageAsync()
+    {
+
+        if (!string.IsNullOrEmpty(Message))
+        {
+            try {
+                await Liff.SendMessagesAsync(new[] { new { type = "text", text = Message } });
+                Message = "";
+            } catch(Exception e)
+            {
+                await JSRuntime.InvokeAsync<object>("liffInterop.alert", e.ToString());
+            }
+        }
+
+    }
+
+}
