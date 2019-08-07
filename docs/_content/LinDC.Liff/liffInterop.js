@@ -9,8 +9,5 @@
                     reject(error);
                 });
         });
-    },
-    alert: function (message) {
-        alert(message);
     }
 };

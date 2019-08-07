@@ -11,9 +11,20 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>LinDC.Liff</AssemblyName>
     <RootNamespace>LineDC.Liff</RootNamespace>
-    <Company>Line Developers Community</Company>
+    <Company>LINE Developers Community</Company>
     <Authors>pierre3</Authors>
-    <Description>LINE</Description>
+    <Description>LINE Front-end Framework (LIFF) Client SDK for blazor
+
+- C# wrapper of LIFF client API for use in Blazor applications.</Description>
+    <PackageId>LineDC.Liff</PackageId>
+    <Product>liff-client-csharp</Product>
+    <Copyright>pierre3</Copyright>
+    <PackageProjectUrl>https://github.com/line-developer-community/liff-client-csharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/line-developer-community/liff-client-csharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>LINE,LIFF,BOT</PackageTags>
+    <Version>0.5.0</Version>
+    <PackageReleaseNotes />
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview6.19307.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview7.19365.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 

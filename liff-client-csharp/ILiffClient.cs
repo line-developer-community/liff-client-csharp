@@ -10,6 +10,7 @@ namespace LineDC.Liff
         bool Initialized { get; }
         LiffData Data { get; }
         Profile Profile { get; }
+        string AccessToken { get; }
 
         Task InitializeAsync(IJSRuntime jSRuntime);
         Task LoadProfileAsync();
