@@ -2,7 +2,7 @@
 C# wrapper of LIFF client API for use in Blazor applications.
 
 ## Demo Site 
-Published on Github Pages
+Published on Github Pages  
 https://line-developer-community.github.io/liff-client-csharp/
 
 ## Usage
