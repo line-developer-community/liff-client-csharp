@@ -9,7 +9,6 @@ https://line-developer-community.github.io/liff-client-csharp/
 Add the following script reference to the body of wwwroot / index.html.
 
 ```html
-<script src="_framework/blazor.webassembly.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script src="_content/LineDC.Liff/liffInterop.js"></script>
 ```
