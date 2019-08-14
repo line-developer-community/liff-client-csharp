@@ -6,16 +6,20 @@ Published on Github Pages
 https://line-developer-community.github.io/liff-client-csharp/
 
 ## Usage
+Install from the NuGet Gallery.
+https://www.nuget.org/packages/LineDC.Liff/
+
+
 Add the following script reference to the body of wwwroot / index.html.
 
 ```html
+<script src="_framework/blazor.webassembly.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script src="_content/LineDC.Liff/liffInterop.js"></script>
 ```
 
 
-The following interfaces are supported. 
-(LINE things Device API is not supported.)
+The following interfaces are supported. (LINE things Device APIs are not supported.)
 ```cs
 public interface ILiffClient
 {
