@@ -2,10 +2,10 @@
 @inject ILiffClient Liff
 @inject IJSRuntime JSRuntime
 
-<button class="form-control btn btn-primary" onclick="@OnClickButtonLiff">LIFF APIリファレンス</button>
-<button class="form-control btn btn-secondary" onclick="@OnClickButtonGithub">liff-app-on-blazor: Github</button>
+<button class="form-control btn btn-primary" @onclick="OnClickButtonLiff">LIFF APIリファレンス</button>
+<button class="form-control btn btn-secondary" @onclick="OnClickButtonGithub">liff-app-on-blazor: Github</button>
 <hr />
-<button class="form-control btn btn-dark" onclick="@OnClickButtonClose">Close Window</button>
+<button class="form-control btn btn-dark" @onclick="OnClickButtonClose">Close Window</button>
 
 @functions{
     private async Task OnClickButtonLiff()

@@ -3,7 +3,7 @@
 @inject IJSRuntime JSRuntime
 
 <input class="form-control" type="text" @bind="@Message" placeholder="送信メッセージを入力してください。" />
-<button class="form-control btn btn-primary" onclick="@SendMessageAsync">送信</button>
+<button class="form-control btn btn-primary" @onclick="SendMessageAsync">送信</button>
 
 @functions{
     private string Message { get; set; }

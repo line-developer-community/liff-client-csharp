@@ -14,7 +14,7 @@
     else
     {
     <div class="card-body">
-        <button class="btn btn-info" onclick="@LoadProfileAsync">プロファイル読み込み</button>
+        <button class="btn btn-info" @onclick="LoadProfileAsync">プロファイル読み込み</button>
     </div>
     }
     <ul class="list-group">
@@ -39,7 +39,7 @@
 
 @functions{
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         try
         {
