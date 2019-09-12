@@ -37,7 +37,7 @@ public interface ILiffClient
 }
 ```
 
-Register as a Singleton service at Startup.cs.
+Register as a singleton service at Startup.cs.
 ```cs
 public class Startup
 {
@@ -53,7 +53,7 @@ public class Startup
 }
 ```
 
-On each page, add the @injectd directive and inject ILiffClient.
+On each page, add the @inject directive and inject ILiffClient.
 
 ```cshtml
 @page "/"
