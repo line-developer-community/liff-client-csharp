@@ -32,7 +32,6 @@ namespace LineDC.Liff
         {
             JSRuntime = jSRuntime;
             if (Initialized) { return; }
-            ///await Task.Delay(1000);
             var json = await JSRuntime.InvokeAsync<string>("liffInterop.init").ConfigureAwait(false);
             Data = JsonConvert.DeserializeObject<LiffData>(json);
             Initialized = true;
