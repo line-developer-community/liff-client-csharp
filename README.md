@@ -5,6 +5,10 @@ C# wrapper of LIFF client API for use in Blazor applications.
 Published on Github Pages  
 https://line-developer-community.github.io/liff-client-csharp/
 
+To check on the LINE app, use the following LIFF URL.  
+[line://app/1580263859-XkGzq2Dg](line://app/1580263859-XkGzq2Dg)
+
+
 ## Usage
 Install from the NuGet Gallery.
 https://www.nuget.org/packages/LineDC.Liff/
