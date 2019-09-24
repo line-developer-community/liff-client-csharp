@@ -23,10 +23,10 @@
     <RepositoryUrl>https://github.com/line-developer-community/liff-client-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>LINE,LIFF,BOT</PackageTags>
-    <Version>0.5.3.0-preview</Version>
-    <PackageReleaseNotes>Supports .Net Core SDK 3.0 RC1</PackageReleaseNotes>
-    <AssemblyVersion>0.5.3.0</AssemblyVersion>
-    <FileVersion>0.5.3.0</FileVersion>
+    <Version>0.6.0.0-preview</Version>
+    <PackageReleaseNotes>Supports .Net Core SDK 3.0.100</PackageReleaseNotes>
+    <AssemblyVersion>0.6.0.0</AssemblyVersion>
+    <FileVersion>0.6.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0-rc1.19457.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta1" />
   </ItemGroup>
 
