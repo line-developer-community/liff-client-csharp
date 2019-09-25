@@ -101,7 +101,7 @@ On each page, add the @inject directive and inject ILiffClient.
 
 @code{
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         try
         {
