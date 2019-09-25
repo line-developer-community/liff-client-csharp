@@ -14,7 +14,7 @@ Install from the NuGet Gallery.
 https://www.nuget.org/packages/LineDC.Liff/
 
 
-Add the following script reference to the body of wwwroot / index.html.
+Add the following script reference to the body of wwwroot/index.html.
 
 ```html
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
@@ -99,7 +99,7 @@ On each page, add the @inject directive and inject ILiffClient.
     </ul>
 </div>
 
-@functions{
+@code{
 
     protected override async Task OnInitAsync()
     {
@@ -111,7 +111,7 @@ On each page, add the @inject directive and inject ILiffClient.
         }
         catch (Exception e)
         {
-            await JSRuntime.InvokeAsync<object>("liffInterop.alert", e.ToString());
+            await JSRuntime.InvokeAsync<object>("alert", e.ToString());
         }
     }
 
@@ -124,7 +124,7 @@ On each page, add the @inject directive and inject ILiffClient.
         }
         catch (Exception e)
         {
-            await JSRuntime.InvokeAsync<object>("liffInterop.alert", e.ToString());
+            await JSRuntime.InvokeAsync<object>("alert", e.ToString());
         }
     }
 
