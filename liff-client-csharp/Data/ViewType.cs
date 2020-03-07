@@ -1,13 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+
 namespace LineDC.Liff.Data
 {
-    
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ViewType
     {
-        Compact,
-        Tall,
-        Full
+        compact,
+        tall,
+        full
     }
 }

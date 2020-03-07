@@ -7,19 +7,20 @@
 <hr />
 <button class="form-control btn btn-dark" @onclick="OnClickButtonClose">Close Window</button>
 
-@functions{
+@code
+{
     private async Task OnClickButtonLiff()
     {
-        await Liff.OpenWindowAsync("https://developers.line.biz/ja/reference/liff/", external: false);
+        await Liff.OpenWindow("https://developers.line.biz/ja/reference/liff/", external: false);
     }
 
     private async Task OnClickButtonGithub()
     {
-        await Liff.OpenWindowAsync("https://github.com/pierre3/liff-app-on-blazor", external: true);
+        await Liff.OpenWindow("https://github.com/pierre3/liff-app-on-blazor", external: true);
     }
 
     private async Task OnClickButtonClose()
     {
-        await Liff.CloseWindowAsync();
+        await Liff.CloseWindow();
     }
 }

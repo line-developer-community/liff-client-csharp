@@ -1,61 +1,104 @@
 ﻿using LineDC.Liff.Data;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
-using System;
 using System.Threading.Tasks;
+
 
 namespace LineDC.Liff
 {
     public class LiffClient : ILiffClient
     {
-        public bool Initialized { get; protected set; }
         protected IJSRuntime JSRuntime { get; set; }
+        protected string LiffId { get; set; }
 
-        public LiffData Data { get; protected set; }
-
-        public Profile Profile { get; protected set; }
-
-        public string AccessToken { get; protected set; }
-
-        public LiffClient()
-        { }
-
-        public void Reset()
+        public LiffClient(string liffId=null)
         {
-            Data = null;
-            Profile = null;
-            Initialized = false;
-            AccessToken = null;
+            LiffId = liffId;
         }
 
-        public async Task InitializeAsync(IJSRuntime jSRuntime)
+        public async ValueTask Init(IJSRuntime jSRuntime)
         {
             JSRuntime = jSRuntime;
-            if (Initialized) { return; }
-            var json = await JSRuntime.InvokeAsync<string>("liffInterop.init").ConfigureAwait(false);
-            Data = JsonConvert.DeserializeObject<LiffData>(json);
-            Initialized = true;
+            await JSRuntime.InvokeVoidAsync("liff.init", new { liffId = LiffId }).ConfigureAwait(false);
         }
 
-        public async Task LoadProfileAsync()
-            => Profile = await JSRuntime.InvokeAsync<Profile>("liff.getProfile").ConfigureAwait(false);
-
-        public async Task SendMessagesAsync(object messages)
-            => await JSRuntime.InvokeAsync<object>("liff.sendMessages", messages).ConfigureAwait(false);
-
-        public async Task OpenWindowAsync(string url, bool external)
-            => await JSRuntime.InvokeAsync<object>("liff.openWindow", new { url, external }).ConfigureAwait(false);
-
-        public async Task CloseWindowAsync()
-            => await JSRuntime.InvokeAsync<object>("liff.closeWindow").ConfigureAwait(false);
-
-        public async Task<string> GetAccessTokenAsync()
+        public async ValueTask<string> GetOS()
         {
-            if (AccessToken == null)
-            {
-                AccessToken = await JSRuntime.InvokeAsync<string>("liff.getAccessToken").ConfigureAwait(false);
-            }
-            return AccessToken;
+            return await JSRuntime.InvokeAsync<string>("liff.getOS").ConfigureAwait(false);
+        }
+
+        public async ValueTask<string> GetLanguage()
+        {
+            return await JSRuntime.InvokeAsync<string>("liff.getLanguage").ConfigureAwait(false);
+        }
+
+        public async ValueTask<string> GetVersion()
+        {
+            return await JSRuntime.InvokeAsync<string>("liff.getVersion").ConfigureAwait(false);
+        }
+
+        public async ValueTask<bool> IsInClient()
+        {
+            return await JSRuntime.InvokeAsync<bool>("liff.isInClient").ConfigureAwait(false);
+        }
+
+        public async ValueTask<bool> IsLoggedIn()
+        {
+            return await JSRuntime.InvokeAsync<bool>("liff.isLoggedIn").ConfigureAwait(false);
+        }
+
+        public async ValueTask Login(string redirectUri = null)
+        {
+            await JSRuntime.InvokeVoidAsync("liff.login", new { redirectUri }).ConfigureAwait(false);
+        }
+
+        public async ValueTask Logout()
+        {
+            await JSRuntime.InvokeVoidAsync("liff.logout").ConfigureAwait(false);
+        }
+
+        public async ValueTask<string> GetAccessToken()
+        {
+            return await JSRuntime.InvokeAsync<string>("liff.getAccessToken").ConfigureAwait(false);
+        }
+
+        public async ValueTask<LiffContext> GetContext()
+        {
+            return await JSRuntime.InvokeAsync<LiffContext>("liff.getContext").ConfigureAwait(false);
+        }
+
+        public async ValueTask<IdTokenPayload> GetDecodedIDToken()
+        {
+            return await JSRuntime.InvokeAsync<IdTokenPayload>("liff.getDecodedIDToken").ConfigureAwait(false);
+        }
+
+        public async ValueTask<Profile> GetProfile()
+        {
+            return await JSRuntime.InvokeAsync<Profile>("liff.getProfile").ConfigureAwait(false);
+        }
+
+        public async ValueTask SendMessages(params object[] messages)
+        {
+            await JSRuntime.InvokeVoidAsync("liff.sendMessages", messages).ConfigureAwait(false);
+        }
+
+        public async ValueTask OpenWindow(string url, bool external = false)
+        {
+            await JSRuntime.InvokeVoidAsync("liff.openWindow", new { url, external }).ConfigureAwait(false);
+        }
+
+        public async ValueTask ShareTargetPicker(params object[] messages)
+        {
+            await JSRuntime.InvokeVoidAsync("liff.shareTargetPicker", messages).ConfigureAwait(false);
+        }
+
+        public async ValueTask<string> ScanCode()
+        {
+            return await JSRuntime.InvokeAsync<string>("liff.scanCode").ConfigureAwait(false);
+        }
+
+        public async ValueTask CloseWindow()
+        {
+            await JSRuntime.InvokeVoidAsync("liff.closeWindow").ConfigureAwait(false);
         }
     }
 }

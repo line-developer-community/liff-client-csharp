@@ -1,15 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace LineDC.Liff.Data
 {
-    [JsonConverter(typeof(StringEnumConverter), new object[] { typeof(CamelCaseNamingStrategy) })]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ContextType
     {
-        Utou,
-        Room,
-        Group,
-        None
+        utou,
+        room,
+        group,
+        none
     }
 }

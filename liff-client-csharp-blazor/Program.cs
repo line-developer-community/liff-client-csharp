@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNetCore.Blazor.Hosting;
+﻿using LineDC.Liff;
+using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace LineDC.LiffOnBlazor
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            builder.RootComponents.Add<App>("app");
+            builder.Services.AddSingleton<ILiffClient>(new LiffClient(liffId:"1653926279-Q4lOAB98"));
+            
+            var host = builder.Build();
+            await host.RunAsync();
         }
 
-        public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
-            BlazorWebAssemblyHost.CreateDefaultBuilder()
-                .UseBlazorStartup<Startup>();
     }
 }

@@ -1,23 +1,27 @@
-﻿using System;
-using System.Threading.Tasks;
-using LineDC.Liff.Data;
+﻿using LineDC.Liff.Data;
 using Microsoft.JSInterop;
+using System.Threading.Tasks;
 
 namespace LineDC.Liff
 {
     public interface ILiffClient
     {
-        bool Initialized { get; }
-        LiffData Data { get; }
-        Profile Profile { get; }
-        string AccessToken { get; }
-
-        Task InitializeAsync(IJSRuntime jSRuntime);
-        Task LoadProfileAsync();
-        Task<string> GetAccessTokenAsync();
-        Task SendMessagesAsync(object messages);
-        Task CloseWindowAsync();
-        Task OpenWindowAsync(string url, bool external);
-        void Reset();
+        ValueTask CloseWindow();
+        ValueTask<string> GetAccessToken();
+        ValueTask<LiffContext> GetContext();
+        ValueTask<IdTokenPayload> GetDecodedIDToken();
+        ValueTask<string> GetLanguage();
+        ValueTask<string> GetOS();
+        ValueTask<Profile> GetProfile();
+        ValueTask<string> GetVersion();
+        ValueTask Init(IJSRuntime jSRuntime);
+        ValueTask<bool> IsInClient();
+        ValueTask<bool> IsLoggedIn();
+        ValueTask Login(string redirectUri = null);
+        ValueTask Logout();
+        ValueTask OpenWindow(string url, bool external = false);
+        ValueTask<string> ScanCode();
+        ValueTask SendMessages(params object[] messages);
+        ValueTask ShareTargetPicker(params object[] messages);
     }
 }
