@@ -16,6 +16,5 @@ namespace LineDC.Liff.Data
         public string RoomId { get; set; }
         [JsonPropertyName("groupId")]
         public string GroupId { get; set; }
-
     }
 }

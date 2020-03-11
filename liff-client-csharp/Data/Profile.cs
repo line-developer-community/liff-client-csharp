@@ -15,5 +15,6 @@ namespace LineDC.Liff.Data
 
         [JsonPropertyName("statusMessage")]
         public string StatusMessage { get; set; }
+
     }
 }

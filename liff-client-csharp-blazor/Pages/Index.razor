@@ -5,46 +5,48 @@
 <div class="card" style="width: 20rem;">
     @if (Profile != null)
     {
-    <img class="card-img" src="@Profile?.PictureUrl" alt="Loading image..." />
-    <div class="card-body">
-        <h5 class="card-title">@Profile?.DisplayName</h5>
-        <p class="card-text">@Profile?.StatusMessage</p>
-    </div>
+        <img class="card-img" src="@Profile?.PictureUrl" alt="Loading image..." />
+        <div class="card-body">
+            <h5 class="card-title">@Profile?.DisplayName</h5>
+            <p class="card-text">@Profile?.StatusMessage</p>
+        </div>
     }
     <ul class="list-group">
         <li class="list-group-item">Type: @Context?.Type</li>
         <li class="list-group-item">ViewType: @Context?.ViewType</li>
         <li class="list-group-item">UserId: @Context?.UserId</li>
-        @if (@Context?.Type == ContextType.utou)
+        @if (@Context?.Type == ContextType.Utou)
         {
-        <li class="list-group-item">UtouId: @Context?.UtouId</li>
+            <li class="list-group-item">UtouId: @Context?.UtouId</li>
         }
-        else if (@Context?.Type == ContextType.room)
+        else if (@Context?.Type == ContextType.Room)
         {
-        <li class="list-group-item">RoomId: @Context?.RoomId</li>
+            <li class="list-group-item">RoomId: @Context?.RoomId</li>
         }
-        else if (@Context?.Type == ContextType.group)
+        else if (@Context?.Type == ContextType.Group)
         {
-        <li class="list-group-item">GroupId: @Context?.GroupId</li>
+            <li class="list-group-item">GroupId: @Context?.GroupId</li>
         }
     </ul>
 </div>
 
 @code{
-    protected Profile Profile {get;set;}
-    protected LiffContext Context{get;set;}
+    protected Profile Profile { get; set; }
+    protected LiffContext Context { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
             await Liff.Init(JSRuntime);
-            if (!(await Liff.IsInClient()) && !(await Liff.IsLoggedIn()))
+            if (!await Liff.IsLoggedIn())
             {
                 await Liff.Login();
+                return;
             }
             Profile = await Liff.GetProfile();
             Context = await Liff.GetContext();
+
             StateHasChanged();
         }
         catch (Exception e)
