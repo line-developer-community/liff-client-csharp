@@ -2,23 +2,47 @@
 @inject ILiffClient Liff
 @inject IJSRuntime JSRuntime
 
-<input class="form-control" type="text" @bind="@Message" placeholder="送信メッセージを入力してください。" />
-<button class="form-control btn btn-primary" @onclick="SendMessageAsync">送信</button>
+    <div class="form-group">
+        <h4>Send Message</h4>
+        <input class="form-control" type="text" @bind="@Message" placeholder="Enter a message to send." />
+        <button class="form-control btn btn-primary" @onclick="SendMessageAsync">Send</button>
+    </div>
+    <div class="form-group">
+        <h4>Share Message</h4>
+        <input class="form-control" type="text" @bind="@Message2" placeholder="Enter a message to share." />
+        <button class="form-control btn btn-primary" @onclick="ShareMessageAsync">Share</button>
+    </div>
 
 @code{
     private string Message { get; set; }
+    private string Message2 { get; set; }
 
     private async void SendMessageAsync()
     {
         if (!string.IsNullOrEmpty(Message))
         {
             try {
-                await Liff.SendMessages(new[] { new { type = "text", text = Message } });
+                await Liff.SendMessages(new { type = "text", text = Message });
                 Message = "";
-            } catch(Exception e)
+            } catch (Exception e)
             {
-                await JSRuntime.InvokeAsync<object>("liffInterop.alert", e.ToString());
+                await JSRuntime.InvokeAsync<object>("alert", e.ToString());
             }
         }
+    }
+
+    private async void ShareMessageAsync()
+    {
+        if (!string.IsNullOrEmpty(Message2))
+        {
+            try {
+                await Liff.ShareTargetPicker(new { type = "text", text = Message2 });
+                Message2 = "";
+            } catch (Exception e)
+            {
+                await JSRuntime.InvokeAsync<object>("alert", e.ToString());
+            }
+        }
+
     }
 }

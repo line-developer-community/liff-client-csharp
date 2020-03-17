@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace LineDC.Liff.Data
+﻿namespace LineDC.Liff.Data
 {
     public enum ContextType
     {

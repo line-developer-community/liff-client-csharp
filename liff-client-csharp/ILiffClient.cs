@@ -6,6 +6,7 @@ namespace LineDC.Liff
 {
     public interface ILiffClient
     {
+        bool Initialized { get; set; }
         ValueTask CloseWindow();
         ValueTask<string> GetAccessToken();
         ValueTask<LiffContext> GetContext();

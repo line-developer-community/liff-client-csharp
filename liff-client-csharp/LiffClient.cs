@@ -1,5 +1,7 @@
 ﻿using LineDC.Liff.Data;
 using Microsoft.JSInterop;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 
@@ -9,6 +11,8 @@ namespace LineDC.Liff
     {
         protected IJSRuntime JSRuntime { get; set; }
         protected string LiffId { get; set; }
+
+        public bool Initialized { get; set; }
 
         public LiffClient(string liffId=null)
         {
@@ -63,7 +67,11 @@ namespace LineDC.Liff
 
         public async ValueTask<LiffContext> GetContext()
         {
-            return await JSRuntime.InvokeAsync<LiffContext>("liff.getContext").ConfigureAwait(false);
+            var json= await JSRuntime.InvokeAsync<string>("liff.getContext").ConfigureAwait(false);
+            if (json == null) { return null; }
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+            return JsonSerializer.Deserialize<LiffContext>(json,options);
         }
 
         public async ValueTask<IdTokenPayload> GetDecodedIDToken()

@@ -1,5 +1,5 @@
 ﻿using LineDC.Liff;
-using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
@@ -11,8 +11,10 @@ namespace LineDC.LiffOnBlazor
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
-            builder.Services.AddSingleton<ILiffClient>(new LiffClient(liffId:"1653926279-Q4lOAB98"));
-            
+            builder.Services.AddBaseAddressHttpClient();
+            builder.Services.AddSingleton<ILiffClient>(new LiffClient(
+                //liffId: "1653926279-KLQm83d2"));
+                liffId: "1653926279-Q4lOAB98"));
             var host = builder.Build();
             await host.RunAsync();
         }
