@@ -67,11 +67,11 @@ namespace LineDC.Liff
 
         public async ValueTask<LiffContext> GetContext()
         {
-            var result = await JSRuntime.InvokeAsync<object>("liff.getContext").ConfigureAwait(false);
-            if (!(result is string json)) { return null; }
+            var json = await JSRuntime.InvokeAsync<object>("liff.getContext").ConfigureAwait(false);
+            await JSRuntime.InvokeVoidAsync("alert",json.GetType().ToString()).ConfigureAwait(false);
             var options = new JsonSerializerOptions();
             options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
-            return JsonSerializer.Deserialize<LiffContext>(json, options);
+            return JsonSerializer.Deserialize<LiffContext>(json.ToString(), options);
         }
 
         public async ValueTask<IdTokenPayload> GetDecodedIDToken()
