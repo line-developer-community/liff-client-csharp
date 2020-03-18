@@ -22,7 +22,7 @@
         if (!string.IsNullOrEmpty(Message))
         {
             try {
-                await Liff.SendMessages(new[] { new { type = "text", text = Message } });
+                await Liff.SendMessages(new { type = "text", text = Message });
                 Message = "";
             } catch (Exception e)
             {
@@ -36,7 +36,7 @@
         if (!string.IsNullOrEmpty(Message2))
         {
             try {
-                await Liff.ShareTargetPicker(new[] { new { type = "text", text = Message2 } });
+                await Liff.ShareTargetPicker(new { type = "text", text = Message2 });
                 Message2 = "";
             } catch (Exception e)
             {

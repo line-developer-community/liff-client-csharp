@@ -22,7 +22,7 @@ namespace LineDC.Liff
         ValueTask Logout();
         ValueTask OpenWindow(string url, bool external = false);
         ValueTask<string> ScanCode();
-        ValueTask SendMessages(object[] messages);
-        ValueTask ShareTargetPicker(object[] messages);
+        ValueTask SendMessages(params object[] messages);
+        ValueTask ShareTargetPicker(params object[] messages);
     }
 }

@@ -84,9 +84,9 @@ namespace LineDC.Liff
             return await JSRuntime.InvokeAsync<Profile>("liff.getProfile").ConfigureAwait(false);
         }
 
-        public async ValueTask SendMessages(object[] messages)
+        public async ValueTask SendMessages(params object[] messages)
         {
-            await JSRuntime.InvokeVoidAsync("liff.sendMessages", messages).ConfigureAwait(false);
+            await JSRuntime.InvokeVoidAsync("liff.sendMessages",args: new[] { messages }).ConfigureAwait(false);
         }
 
         public async ValueTask OpenWindow(string url, bool external = false)
@@ -94,9 +94,9 @@ namespace LineDC.Liff
             await JSRuntime.InvokeVoidAsync("liff.openWindow", new { url, external }).ConfigureAwait(false);
         }
 
-        public async ValueTask ShareTargetPicker(object[] messages)
+        public async ValueTask ShareTargetPicker(params object[] messages)
         {
-            await JSRuntime.InvokeVoidAsync("liff.shareTargetPicker", messages).ConfigureAwait(false);
+            await JSRuntime.InvokeVoidAsync("liff.shareTargetPicker", args: new[] { messages }).ConfigureAwait(false);
         }
 
         public async ValueTask<string> ScanCode()

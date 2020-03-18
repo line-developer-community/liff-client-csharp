@@ -9,12 +9,16 @@ namespace LineDC.LiffOnBlazor
     {
         public static async Task Main(string[] args)
         {
+            
+#if DEBUG
+            var liffId  = "1653926279-KLQm83d2";
+#else       
+            var liffId    = "1653926279-Q4lOAB98";
+#endif
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
             builder.Services.AddBaseAddressHttpClient();
-            builder.Services.AddSingleton<ILiffClient>(new LiffClient(
-                //liffId: "1653926279-KLQm83d2"));
-                liffId: "1653926279-Q4lOAB98"));
+            builder.Services.AddSingleton<ILiffClient>(new LiffClient(liffId));
             var host = builder.Build();
             await host.RunAsync();
         }
