@@ -1,12 +1,12 @@
 # liff-client-csharp
-C# wrapper of LIFF client API for use in Blazor applications.
+C# wrapper of LIFF(v2) client API for use in Blazor applications.
 
 ## Demo Site 
 Published on Github Pages  
 https://line-developer-community.github.io/liff-client-csharp/
 
 To check on the LINE app, use the following LIFF URL.  
-[line://app/1580263859-XkGzq2Dg](line://app/1580263859-XkGzq2Dg)
+[line://app/1653926279-Q4lOAB98](line://app/1653926279-Q4lOAB98)
 
 
 ## Usage
@@ -18,7 +18,7 @@ Add the following script reference to the body of wwwroot/index.html.
 
 ```html
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
-<script src="_content/LineDC.Liff/liffInterop.js"></script>
+<script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 ```
 
 
@@ -26,34 +26,40 @@ The following interfaces are supported. (LINE things Device APIs are not support
 ```cs
 public interface ILiffClient
 {
-    bool Initialized { get; }
-    LiffData Data { get; }
-    Profile Profile { get; }
-    string AccessToken { get; }
-
-    Task InitializeAsync(IJSRuntime jSRuntime);
-    Task LoadProfileAsync();
-    Task<string> GetAccessTokenAsync();
-    Task SendMessagesAsync(object messages);
-    Task CloseWindowAsync();
-    Task OpenWindowAsync(string url, bool external);
-    void Reset();
+    bool Initialized { get; set; }
+    ValueTask CloseWindow();
+    ValueTask<string> GetAccessToken();
+    ValueTask<LiffContext> GetContext();
+    ValueTask<IdTokenPayload> GetDecodedIDToken();
+    ValueTask<string> GetLanguage();
+    ValueTask<string> GetOS();
+    ValueTask<Profile> GetProfile();
+    ValueTask<string> GetVersion();
+    ValueTask Init(IJSRuntime jSRuntime);
+    ValueTask<bool> IsInClient();
+    ValueTask<bool> IsLoggedIn();
+    ValueTask Login(string redirectUri = null);
+    ValueTask Logout();
+    ValueTask OpenWindow(string url, bool external = false);
+    ValueTask<string> ScanCode();
+    ValueTask SendMessages(params object[] messages);
+    ValueTask ShareTargetPicker(params object[] messages);
 }
 ```
 
-Register as a singleton service at Startup.cs.
+Register as a singleton service at Main method of Program.cs.
 ```cs
-public class Startup
+public static async Task Main(string[] args)
 {
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddSingleton<ILiffClient, LiffClient>();
-    }
-
-    public void Configure(IComponentsApplicationBuilder app)
-    {
-        app.AddComponent<App>("app");
-    }
+    var builder = WebAssemblyHostBuilder.CreateDefault(args);
+    builder.RootComponents.Add<App>("app");
+    builder.Services.AddBaseAddressHttpClient();
+    
+    var liffId    = "1653926279-Q4lOAB98";
+    builder.Services.AddSingleton<ILiffClient>(new LiffClient(liffId));
+    
+    var host = builder.Build();
+    await host.RunAsync();
 }
 ```
 
@@ -65,48 +71,69 @@ On each page, add the @inject directive and inject ILiffClient.
 @inject IJSRuntime JSRuntime
 
 <div class="card" style="width: 20rem;">
-    @if (Liff.Profile != null)
+    @if (Profile != null)
     {
-    <img class="card-img" src="@Liff.Profile?.PictureUrl" alt="Loading image..." />
-    <div class="card-body">
-        <h5 class="card-title">@Liff.Profile?.DisplayName</h5>
-        <p class="card-text">@Liff.Profile?.StatusMessage</p>
-    </div>
-    }
-    else
-    {
-    <div class="card-body">
-        <button class="btn btn-info" onclick="@LoadProfileAsync">プロファイル読み込み</button>
-    </div>
+        <img class="card-img" src="@Profile?.PictureUrl" alt="Loading image..." />
+        <div class="card-body">
+            <h5 class="card-title">@Profile?.DisplayName</h5>
+            <p class="card-text">@Profile?.StatusMessage</p>
+        </div>
     }
     <ul class="list-group">
-        <li class="list-group-item">Language: @Liff.Data?.Language</li>
-        <li class="list-group-item">Type: @Liff.Data?.Context.Type</li>
-        <li class="list-group-item">ViewType: @Liff.Data?.Context.ViewType</li>
-        <li class="list-group-item">UserId: @Liff.Data?.Context.UserId</li>
-        @if (@Liff.Data?.Context.Type == ContextType.Utou)
+        <li class="list-group-item">LIFF Ver.: @Version</li>
+        <li class="list-group-item">OS: @OS</li>
+        <li class="list-group-item">Language: @Language</li>
+        <li class="list-group-item">TokenId: @TokenId</li>
+        <li class="list-group-item">Type: @Context?.Type</li>
+        <li class="list-group-item">ViewType: @Context?.ViewType</li>
+        <li class="list-group-item">UserId: @Context?.UserId</li>
+        @if (@Context?.Type == ContextType.Utou)
         {
-        <li class="list-group-item">UtouId: @Liff.Data?.Context.UtouId</li>
+            <li class="list-group-item">UtouId: @Context?.UtouId</li>
         }
-        else if (@Liff.Data?.Context.Type == ContextType.Room)
+        else if (@Context?.Type == ContextType.Room)
         {
-        <li class="list-group-item">RoomId: @Liff.Data?.Context.RoomId</li>
+            <li class="list-group-item">RoomId: @Context?.RoomId</li>
         }
-        else if (@Liff.Data?.Context.Type == ContextType.Group)
+        else if (@Context?.Type == ContextType.Group)
         {
-        <li class="list-group-item">GroupId: @Liff.Data?.Context.GroupId</li>
+            <li class="list-group-item">GroupId: @Context?.GroupId</li>
         }
     </ul>
 </div>
 
 @code{
+    protected Profile Profile { get; set; }
+    protected LiffContext Context { get; set; }
+    protected string TokenId { get; set; }
+    protected string OS { get; set; }
+    protected string Language { get; set; }
+    protected string Version { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            await Liff.InitializeAsync(JSRuntime);
-            await Liff.LoadProfileAsync();
+            if (!Liff.Initialized)
+            {
+                await Liff.Init(JSRuntime);
+                if (!await Liff.IsLoggedIn())
+                {
+                    await Liff.Login();
+                    return;
+                }
+                Liff.Initialized = true;
+            }
+            Profile = await Liff.GetProfile();
+            if (await Liff.IsInClient())
+            {
+                Context = await Liff.GetContext();
+            }
+            var idtoken = await Liff.GetDecodedIDToken();
+            TokenId = idtoken.Sub;
+            OS = await Liff.GetOS();
+            Language = await Liff.GetLanguage();
+            Version = await Liff.GetVersion();
             StateHasChanged();
         }
         catch (Exception e)
@@ -114,20 +141,6 @@ On each page, add the @inject directive and inject ILiffClient.
             await JSRuntime.InvokeAsync<object>("alert", e.ToString());
         }
     }
-
-    private async Task LoadProfileAsync()
-    {
-        try
-        {
-            await Liff.LoadProfileAsync();
-            StateHasChanged();
-        }
-        catch (Exception e)
-        {
-            await JSRuntime.InvokeAsync<object>("alert", e.ToString());
-        }
-    }
-
 }
 
 ```
