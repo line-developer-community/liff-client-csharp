@@ -1,6 +1,11 @@
 # liff-client-csharp
 C# wrapper of LIFF(v2) client API for use in Blazor applications.
 
+## Supported Version
+- LINE Front-end Framework v2
+- .NET Core 3.1 SDK
+- Blazor WebAssembly 3.2.0 Preview 2
+
 ## Demo Site 
 Published on Github Pages  
 https://line-developer-community.github.io/liff-client-csharp/
