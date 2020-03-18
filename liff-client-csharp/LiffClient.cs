@@ -14,7 +14,7 @@ namespace LineDC.Liff
 
         public bool Initialized { get; set; }
 
-        public LiffClient(string liffId=null)
+        public LiffClient(string liffId = null)
         {
             LiffId = liffId;
         }
@@ -68,7 +68,6 @@ namespace LineDC.Liff
         public async ValueTask<LiffContext> GetContext()
         {
             var json = await JSRuntime.InvokeAsync<object>("liff.getContext").ConfigureAwait(false);
-            await JSRuntime.InvokeVoidAsync("alert",json.GetType().ToString()).ConfigureAwait(false);
             var options = new JsonSerializerOptions();
             options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
             return JsonSerializer.Deserialize<LiffContext>(json.ToString(), options);
@@ -86,7 +85,7 @@ namespace LineDC.Liff
 
         public async ValueTask SendMessages(params object[] messages)
         {
-            await JSRuntime.InvokeVoidAsync("liff.sendMessages",args: new[] { messages }).ConfigureAwait(false);
+            await JSRuntime.InvokeVoidAsync("liff.sendMessages", args: new[] { messages }).ConfigureAwait(false);
         }
 
         public async ValueTask OpenWindow(string url, bool external = false)
