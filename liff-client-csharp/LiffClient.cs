@@ -69,6 +69,7 @@ namespace LineDC.Liff
         {
             var json= await JSRuntime.InvokeAsync<string>("liff.getContext").ConfigureAwait(false);
             if (json == null) { return null; }
+            await JSRuntime.InvokeVoidAsync("alert",json).ConfigureAwait(false);
             var options = new JsonSerializerOptions();
             options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
             return JsonSerializer.Deserialize<LiffContext>(json,options);
