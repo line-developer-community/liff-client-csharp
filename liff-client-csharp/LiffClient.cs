@@ -107,5 +107,25 @@ namespace LineDC.Liff
         {
             await JSRuntime.InvokeVoidAsync("liff.closeWindow").ConfigureAwait(false);
         }
+
+        public async ValueTask<string> GetIDToken()
+        {
+            return await JSRuntime.InvokeAsync<string>("liff.getIDToken").ConfigureAwait(false);
+        }
+
+        public async ValueTask<string> GetLineVersion()
+        {
+            return await JSRuntime.InvokeAsync<string>("liff.getLineVersion").ConfigureAwait(false);
+        }
+
+        public async ValueTask<bool> IsApiAvailable(string apiName)
+        {
+            return await JSRuntime.InvokeAsync<bool>("liff.isApiAvailable", apiName).ConfigureAwait(false);
+        }
+
+        public async ValueTask<Friendship> GetFriendship()
+        {
+            return await JSRuntime.InvokeAsync<Friendship>("liff.getFriendship").ConfigureAwait(false);
+        }
     }
 }

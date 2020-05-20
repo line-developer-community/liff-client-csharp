@@ -23,15 +23,19 @@
     <RepositoryUrl>https://github.com/line-developer-community/liff-client-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>LINE,LIFF,BOT</PackageTags>
-    <Version>0.7.0.0-preview</Version>
-    <PackageReleaseNotes>- Supports LIFF v2
-- Updated to Blazor WebAssembly 3.2.0 Preview 2</PackageReleaseNotes>
-    <AssemblyVersion>0.7.0.0</AssemblyVersion>
-    <FileVersion>0.7.0.0</FileVersion>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>- Updated to Blazor WebAssembly 3.2.0 (officially Release)
+- Added the following APIs
+  - GetIDToken
+  - GetLineVersion
+  - IsApiAvailable
+  - GetFriendship</PackageReleaseNotes>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-preview.1.20124.5" />
   </ItemGroup>
 
 </Project>

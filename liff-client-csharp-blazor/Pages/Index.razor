@@ -11,36 +11,44 @@
             <p class="card-text">@Profile?.StatusMessage</p>
         </div>
     }
-    <ul class="list-group">
-        <li class="list-group-item">LIFF Ver.: @Version</li>
-        <li class="list-group-item">OS: @OS</li>
-        <li class="list-group-item">Language: @Language</li>
-        <li class="list-group-item">TokenId: @TokenId</li>
-        <li class="list-group-item">Type: @Context?.Type</li>
-        <li class="list-group-item">ViewType: @Context?.ViewType</li>
-        <li class="list-group-item">UserId: @Context?.UserId</li>
-        @if (@Context?.Type == ContextType.Utou)
-        {
-            <li class="list-group-item">UtouId: @Context?.UtouId</li>
-        }
-        else if (@Context?.Type == ContextType.Room)
-        {
-            <li class="list-group-item">RoomId: @Context?.RoomId</li>
-        }
-        else if (@Context?.Type == ContextType.Group)
-        {
-            <li class="list-group-item">GroupId: @Context?.GroupId</li>
-        }
-    </ul>
+<ul class="list-group">
+    <li class="list-group-item">LIFF Ver.: @Version</li>
+    <li class="list-group-item">LINE Ver: @LineVersion</li>
+    <li class="list-group-item">OS: @OS</li>
+    <li class="list-group-item">Language: @Language</li>
+    <li class="list-group-item">TokenId: @TokenId</li>
+    <li class="list-group-item">Type: @Context?.Type</li>
+    <li class="list-group-item">ViewType: @Context?.ViewType</li>
+    <li class="list-group-item">UserId: @Context?.UserId</li>
+    <li class="list-group-item">Friendship: @Friendship.FriendFlag</li>
+    <li class="list-group-item">IDToken: @IDToken.Substring(0, 10) + "xxxxxxxx...";</li>
+
+    @if (@Context?.Type == ContextType.Utou)
+    {
+        <li class="list-group-item">UtouId: @Context?.UtouId</li>
+    }
+    else if (@Context?.Type == ContextType.Room)
+    {
+        <li class="list-group-item">RoomId: @Context?.RoomId</li>
+    }
+    else if (@Context?.Type == ContextType.Group)
+    {
+        <li class="list-group-item">GroupId: @Context?.GroupId</li>
+    }
+</ul>
 </div>
 
 @code{
+
     protected Profile Profile { get; set; }
     protected LiffContext Context { get; set; }
     protected string TokenId { get; set; }
     protected string OS { get; set; }
     protected string Language { get; set; }
     protected string Version { get; set; }
+    protected string IDToken { get; set; }
+    protected string LineVersion { get; set; }
+    protected Friendship Friendship { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -66,6 +74,8 @@
             OS = await Liff.GetOS();
             Language = await Liff.GetLanguage();
             Version = await Liff.GetVersion();
+            LineVersion = await Liff.GetLineVersion();
+            Friendship = await Liff.GetFriendship();
             StateHasChanged();
         }
         catch (Exception e)
