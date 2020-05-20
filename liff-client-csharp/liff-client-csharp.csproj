@@ -35,7 +35,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-preview.1.20124.5" />
+    <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="3.2.0" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
 </Project>
