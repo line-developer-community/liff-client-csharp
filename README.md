@@ -4,7 +4,7 @@ C# wrapper of LIFF(v2) client API for use in Blazor applications.
 ## Supported Version
 - LINE Front-end Framework v2
 - .NET Core 3.1 SDK
-- Blazor WebAssembly 3.2.0 Preview 2
+- Blazor WebAssembly 3.2.0
 
 ## Demo Site 
 Published on Github Pages  
@@ -28,18 +28,25 @@ Add the following script reference to the body of wwwroot/index.html.
 
 The following interfaces are supported. (LINE things Device APIs are not supported.)
 ```cs
+using LineDC.Liff.Data;
+using Microsoft.JSInterop;
+using System.Threading.Tasks;
+
+
 public interface ILiffClient
 {
     bool Initialized { get; set; }
+    ValueTask Init(IJSRuntime jSRuntime);
     ValueTask CloseWindow();
     ValueTask<string> GetAccessToken();
+    ValueTask<string> GetIDToken();
     ValueTask<LiffContext> GetContext();
     ValueTask<IdTokenPayload> GetDecodedIDToken();
     ValueTask<string> GetLanguage();
     ValueTask<string> GetOS();
     ValueTask<Profile> GetProfile();
     ValueTask<string> GetVersion();
-    ValueTask Init(IJSRuntime jSRuntime);
+    ValueTask<string> GetLineVersion();
     ValueTask<bool> IsInClient();
     ValueTask<bool> IsLoggedIn();
     ValueTask Login(string redirectUri = null);
@@ -48,6 +55,8 @@ public interface ILiffClient
     ValueTask<string> ScanCode();
     ValueTask SendMessages(params object[] messages);
     ValueTask ShareTargetPicker(params object[] messages);
+    ValueTask<bool> IsApiAvailable(string apiName);
+    ValueTask<Friendship> GetFriendship();
 }
 ```
 
@@ -57,7 +66,10 @@ public static async Task Main(string[] args)
 {
     var builder = WebAssemblyHostBuilder.CreateDefault(args);
     builder.RootComponents.Add<App>("app");
-    builder.Services.AddBaseAddressHttpClient();
+    builder.Services.AddSingleton(new HttpClient
+    {
+        BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+    });
     
     var liffId    = "1653926279-Q4lOAB98";
     builder.Services.AddSingleton<ILiffClient>(new LiffClient(liffId));
@@ -83,36 +95,43 @@ On each page, add the @inject directive and inject ILiffClient.
             <p class="card-text">@Profile?.StatusMessage</p>
         </div>
     }
-    <ul class="list-group">
-        <li class="list-group-item">LIFF Ver.: @Version</li>
-        <li class="list-group-item">OS: @OS</li>
-        <li class="list-group-item">Language: @Language</li>
-        <li class="list-group-item">TokenId: @TokenId</li>
-        <li class="list-group-item">Type: @Context?.Type</li>
-        <li class="list-group-item">ViewType: @Context?.ViewType</li>
-        <li class="list-group-item">UserId: @Context?.UserId</li>
-        @if (@Context?.Type == ContextType.Utou)
-        {
-            <li class="list-group-item">UtouId: @Context?.UtouId</li>
-        }
-        else if (@Context?.Type == ContextType.Room)
-        {
-            <li class="list-group-item">RoomId: @Context?.RoomId</li>
-        }
-        else if (@Context?.Type == ContextType.Group)
-        {
-            <li class="list-group-item">GroupId: @Context?.GroupId</li>
-        }
-    </ul>
+<ul class="list-group">
+    <li class="list-group-item">LIFF Ver.: @Version</li>
+    <li class="list-group-item">LINE Ver: @LineVersion</li>
+    <li class="list-group-item">OS: @OS</li>
+    <li class="list-group-item">Language: @Language</li>
+    <li class="list-group-item">TokenId: @TokenId</li>
+    <li class="list-group-item">Type: @Context?.Type</li>
+    <li class="list-group-item">ViewType: @Context?.ViewType</li>
+    <li class="list-group-item">UserId: @Context?.UserId</li>
+    <li class="list-group-item">IDToken: @IDToken?.Substring(0, 10)xxxxxxxx...</li>
+
+    @if (@Context?.Type == ContextType.Utou)
+    {
+        <li class="list-group-item">UtouId: @Context?.UtouId</li>
+    }
+    else if (@Context?.Type == ContextType.Room)
+    {
+        <li class="list-group-item">RoomId: @Context?.RoomId</li>
+    }
+    else if (@Context?.Type == ContextType.Group)
+    {
+        <li class="list-group-item">GroupId: @Context?.GroupId</li>
+    }
+</ul>
 </div>
 
 @code{
+
     protected Profile Profile { get; set; }
     protected LiffContext Context { get; set; }
     protected string TokenId { get; set; }
     protected string OS { get; set; }
     protected string Language { get; set; }
     protected string Version { get; set; }
+    protected string IDToken { get; set; }
+    protected string LineVersion { get; set; }
+    protected Friendship Friendship { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -138,6 +157,9 @@ On each page, add the @inject directive and inject ILiffClient.
             OS = await Liff.GetOS();
             Language = await Liff.GetLanguage();
             Version = await Liff.GetVersion();
+            LineVersion = await Liff.GetLineVersion();
+            //Friendship = await Liff.GetFriendship();
+            IDToken = await Liff.GetIDToken();
             StateHasChanged();
         }
         catch (Exception e)
@@ -145,6 +167,8 @@ On each page, add the @inject directive and inject ILiffClient.
             await JSRuntime.InvokeAsync<object>("alert", e.ToString());
         }
     }
+
 }
+
 
 ```
