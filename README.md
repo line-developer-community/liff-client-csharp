@@ -66,7 +66,10 @@ public static async Task Main(string[] args)
 {
     var builder = WebAssemblyHostBuilder.CreateDefault(args);
     builder.RootComponents.Add<App>("app");
-    builder.Services.AddBaseAddressHttpClient();
+    builder.Services.AddSingleton(new HttpClient
+    {
+        BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+    });
     
     var liffId    = "1653926279-Q4lOAB98";
     builder.Services.AddSingleton<ILiffClient>(new LiffClient(liffId));
