@@ -20,8 +20,7 @@
     <li class="list-group-item">Type: @Context?.Type</li>
     <li class="list-group-item">ViewType: @Context?.ViewType</li>
     <li class="list-group-item">UserId: @Context?.UserId</li>
-    <li class="list-group-item">Friendship: @Friendship.FriendFlag</li>
-    <li class="list-group-item">IDToken: @IDToken.Substring(0, 10) + "xxxxxxxx...";</li>
+    <li class="list-group-item">IDToken: @IDToken?.Substring(0, 10)xxxxxxxx...</li>
 
     @if (@Context?.Type == ContextType.Utou)
     {
@@ -75,7 +74,8 @@
             Language = await Liff.GetLanguage();
             Version = await Liff.GetVersion();
             LineVersion = await Liff.GetLineVersion();
-            Friendship = await Liff.GetFriendship();
+            //Friendship = await Liff.GetFriendship();
+            IDToken = await Liff.GetIDToken();
             StateHasChanged();
         }
         catch (Exception e)
