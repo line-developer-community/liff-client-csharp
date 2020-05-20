@@ -28,18 +28,25 @@ Add the following script reference to the body of wwwroot/index.html.
 
 The following interfaces are supported. (LINE things Device APIs are not supported.)
 ```cs
+using LineDC.Liff.Data;
+using Microsoft.JSInterop;
+using System.Threading.Tasks;
+
+
 public interface ILiffClient
 {
     bool Initialized { get; set; }
+    ValueTask Init(IJSRuntime jSRuntime);
     ValueTask CloseWindow();
     ValueTask<string> GetAccessToken();
+    ValueTask<string> GetIDToken();
     ValueTask<LiffContext> GetContext();
     ValueTask<IdTokenPayload> GetDecodedIDToken();
     ValueTask<string> GetLanguage();
     ValueTask<string> GetOS();
     ValueTask<Profile> GetProfile();
     ValueTask<string> GetVersion();
-    ValueTask Init(IJSRuntime jSRuntime);
+    ValueTask<string> GetLineVersion();
     ValueTask<bool> IsInClient();
     ValueTask<bool> IsLoggedIn();
     ValueTask Login(string redirectUri = null);
@@ -48,6 +55,8 @@ public interface ILiffClient
     ValueTask<string> ScanCode();
     ValueTask SendMessages(params object[] messages);
     ValueTask ShareTargetPicker(params object[] messages);
+    ValueTask<bool> IsApiAvailable(string apiName);
+    ValueTask<Friendship> GetFriendship();
 }
 ```
 
