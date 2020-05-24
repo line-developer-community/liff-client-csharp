@@ -26,10 +26,10 @@
     <Version>1.0.0</Version>
     <PackageReleaseNotes>- Updated to Blazor WebAssembly 3.2.0 (officially Release)
 - Added the following APIs
-  - GetIDToken
-  - GetLineVersion
-  - IsApiAvailable
-  - GetFriendship</PackageReleaseNotes>
+  -- GetIDToken
+  -- GetLineVersion
+  -- IsApiAvailable
+  -- GetFriendship</PackageReleaseNotes>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>

@@ -1,0 +1,26 @@
+﻿@page "/links"
+@inject ILiffClient Liff
+@inject IJSRuntime JSRuntime
+
+<button class="form-control btn btn-primary" @onclick="OnClickButtonLiff">LIFF API Reference</button>
+<button class="form-control btn btn-secondary" @onclick="OnClickButtonGithub">liff-app-on-blazor: Github</button>
+<hr />
+<button class="form-control btn btn-dark" @onclick="OnClickButtonClose">Close Window</button>
+
+@code
+{
+    private async Task OnClickButtonLiff()
+    {
+        await Liff.OpenWindow("https://developers.line.biz/ja/reference/liff/", external: false);
+    }
+
+    private async Task OnClickButtonGithub()
+    {
+        await Liff.OpenWindow("https://github.com/line-developer-community/liff-client-csharp", external: true);
+    }
+
+    private async Task OnClickButtonClose()
+    {
+        await Liff.CloseWindow();
+    }
+}

@@ -1,0 +1,83 @@
+﻿@page "/send"
+@inject ILiffClient Liff
+@inject IJSRuntime JSRuntime
+
+<div class="form-group">
+    <h4>Send Message</h4>
+    <input class="form-control" type="text" @bind="@Message" placeholder="Enter a message to send." />
+    <button class="form-control btn btn-primary" @onclick="SendMessageAsync">Send</button>
+</div>
+<div class="form-group">
+    <h4>Share Message</h4>
+    <input class="form-control" type="text" @bind="@Message2" placeholder="Enter a message to share." />
+    <button class="form-control btn btn-primary" @onclick="ShareMessageAsync">Share</button>
+</div>
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ErrorMessage
+    </div>
+}
+
+@code{
+    private string Message { get; set; }
+    private string Message2 { get; set; }
+
+    private string errorMessage;
+    private string ErrorMessage
+    {
+        get => errorMessage;
+        set
+        {
+            errorMessage = value;
+            StateHasChanged();
+        }
+    }
+
+    private async void SendMessageAsync()
+    {
+        ErrorMessage = "";
+        if (!await Liff.IsInClient())
+        {
+            ErrorMessage = "This feature is only available in the LINE app.";
+            return;
+        }
+        if (!string.IsNullOrEmpty(Message))
+        {
+
+            try
+            {
+                await Liff.SendMessages(new { type = "text", text = Message });
+                Message = "";
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
+            }
+        }
+    }
+
+    private async void ShareMessageAsync()
+    {
+        ErrorMessage = "";
+        if (!string.IsNullOrEmpty(Message2))
+        {
+            try
+            {
+                if(!await Liff.IsApiAvailable("shareTargetPicker"))
+                {
+                    ErrorMessage = "ShareTargetPicker is not available.";
+                    return;
+                }
+
+                await Liff.ShareTargetPicker(new { type = "text", text = Message2 });
+                Message2 = "";
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
+            }
+        }
+
+    }
+}
