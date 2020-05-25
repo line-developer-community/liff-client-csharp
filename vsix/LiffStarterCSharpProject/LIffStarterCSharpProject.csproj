@@ -12,8 +12,8 @@
     <ProjectGuid>{DDA26EB1-0C0F-4658-B53E-CD65EA09C7EC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlazorLiffSpaProject</RootNamespace>
-    <AssemblyName>BlazorLiffSpaProject</AssemblyName>
+    <RootNamespace>LiffStarterCSharpProject</RootNamespace>
+    <AssemblyName>LiffStarterCSharpProject</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
@@ -59,16 +59,18 @@
     <None Include="Pages\Send.razor" />
     <None Include="Program.cs" />
     <None Include="AppSettings.cs" />
+    <None Include=".gitignore" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.razor" />
     <None Include="Pages\Index.razor" />
-    <None Include="BlazorLiffSpaProject.ico" />
+    <None Include="LiffStarterCSharp.ico" />
     <None Include="Properties\launchSettings.json" />
     <None Include="Shared\MainLayout.razor" />
     <None Include="Shared\NavMenu.razor" />
     <None Include="wwwroot\.nojekyll" />
+    <None Include="wwwroot\appsettings.Development.json" />
     <None Include="wwwroot\appsettings.json" />
     <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
     <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
@@ -81,7 +83,7 @@
     <None Include="_Imports.razor" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="BlazorLiffSpaProject.vstemplate" />
+    <VSTemplate Include="LiffStarterCSharp.vstemplate" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\404.html" />

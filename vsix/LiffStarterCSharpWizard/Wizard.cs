@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorLiffSpaWizard
+namespace LiffStarterCSharpWizard
 {
     public class Wizard : IWizard
     {

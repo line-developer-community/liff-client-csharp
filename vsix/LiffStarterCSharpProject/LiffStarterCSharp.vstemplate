@@ -1,18 +1,18 @@
 ﻿<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>Blazor GitHub Pages SPA</Name>
-    <Description>Blazor WebAssembly template for hosting on GitHub Pages.</Description>
+    <Name>LIFF Starter C#</Name>
+    <Description>A project template for Blazor Webassembly using the LINE Front-end Framework (LIFF).</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>BlazorGitHubPagesSpa</DefaultName>
+    <DefaultName>LiffApplication</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <CreateInPlace>true</CreateInPlace>
-    <Icon>BlazorLiffSpaProject.ico</Icon>
+    <Icon>LiffStarterCSharp.ico</Icon>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="$safeprojectname$.csproj" File="$safeprojectname$.csproj" ReplaceParameters="true">
@@ -48,6 +48,8 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="404.html">404.html</ProjectItem>
         <ProjectItem ReplaceParameters="false" TargetFileName="favicon.ico">favicon.ico</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="index.html">index.html</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.json">appsettings.json</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.Development.json">appsettings.Development.json</ProjectItem>
       </Folder>
       <Folder Name="Pages" TargetFolderName="Pages">
         <ProjectItem ReplaceParameters="false" TargetFileName="Links.razor">Links.razor</ProjectItem>
@@ -62,10 +64,11 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="App.razor">App.razor</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Program.cs">Program.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="AppSettings.cs">AppSettings.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName=".gitignore">.gitignore</ProjectItem>
     </Project>
   </TemplateContent>
   <WizardExtension>
-    <Assembly>BlazorWASMGitHubPagesWizard, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=5595a929643c3c2f</Assembly>
-    <FullClassName>BlazorWASMGitHubPagesWizard.Wizard</FullClassName>
+    <Assembly>LiffStarterCSharpWizard, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=5595a929643c3c2f</Assembly>
+    <FullClassName>LiffStarterCSharpWizard.Wizard</FullClassName>
   </WizardExtension>
 </VSTemplate>

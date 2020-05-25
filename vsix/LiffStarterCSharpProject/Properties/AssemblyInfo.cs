@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BlazorWASMGitHubPagesTemplate")]
+[assembly: AssemblyTitle("LIffStarterCSharpProject")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("寛忠 小林")]
-[assembly: AssemblyProduct("BlazorWASMGitHubPagesTemplate")]
-[assembly: AssemblyCopyright("Copyright © 寛忠 小林 2020")]
+[assembly: AssemblyCompany("LINE Developer Community")]
+[assembly: AssemblyProduct("LiffStarterCSharpProject")]
+[assembly: AssemblyCopyright("pierre3")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

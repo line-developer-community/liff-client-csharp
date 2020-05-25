@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" ?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="BlazorWASMGitHubPagesVSIX.b4fa15cb-bd5b-4cd2-99a6-e9cd6a2e30c6" Version="1.1.0" Language="en-US" Publisher="pierre3" />
-        <DisplayName>Blazor GitHub Pages SPA</DisplayName>
-        <Description xml:space="preserve">Blazor WebAssembly template for hosting on GitHub Pages.</Description>
-        <MoreInfo>https://github.com/pierre3/blazor-wasm-github-pages-template</MoreInfo>
+        <Identity Id="LiffStarterCSharp6E9B3878-9E0A-4B36-A136-0B4C723C2F3D" Version="1.0.0" Language="en-US" Publisher="pierre3" />
+        <DisplayName>LIFF Starter C#</DisplayName>
+        <Description xml:space="preserve">A project template for Blazor Webassembly using the LINE Front-end Framework (LIFF).</Description>
+        <MoreInfo>https://github.com/line-developer-community/liff-client-csharp</MoreInfo>
         <License>LICENSE.txt</License>
-        <Tags>Blazor; Blazor WebAssembly; GitHub Pages</Tags>
+        <Tags>Blazor; Blazor WebAssembly; LIFF; LINE</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.6, 17.0)" />
@@ -20,7 +20,7 @@
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,17.0)" DisplayName="Visual Studio core editor" />
     </Prerequisites>
     <Assets>
-        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="BlazorLiffSpaProject" d:TargetPath="|BlazorLiffSpaProject;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
-        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="BlazorLiffSpaWizard" Path="|BlazorLiffSpaWizard|" AssemblyName="|BlazorLiffSpaWizard;AssemblyName|" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="LiffStarterCSharpWizard" Path="|LiffStarterCSharpWizard|" AssemblyName="|LiffStarterCSharpWizard;AssemblyName|" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="LIffStarterCSharpProject" d:TargetPath="|LIffStarterCSharpProject;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
     </Assets>
 </PackageManifest>

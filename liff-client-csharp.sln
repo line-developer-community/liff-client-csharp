@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liff-client-csharp", "liff-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "liff-client-csharp-blazor", "liff-client-csharp-blazor\liff-client-csharp-blazor.csproj", "{F3115E9C-18EA-4757-9C04-DDEDC2A3D66D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorLiffSpaProject", "LiffBlazorSpaProject\BlazorLiffSpaProject.csproj", "{DDA26EB1-0C0F-4658-B53E-CD65EA09C7EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIffStarterCSharpProject", "vsix\LiffStarterCSharpProject\LIffStarterCSharpProject.csproj", "{DDA26EB1-0C0F-4658-B53E-CD65EA09C7EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorLiffSpaVSIX", "LiffBlazorSparVSIX\BlazorLiffSpaVSIX.csproj", "{7A38D95D-FF02-4816-B337-3B02A1B5A5B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiffStarterCSharpVSIX", "vsix\LiffStarterCSharpVSIX\LiffStarterCSharpVSIX.csproj", "{7A38D95D-FF02-4816-B337-3B02A1B5A5B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorLiffSpaWizard", "LiffBlazorSpaWizard\BlazorLiffSpaWizard.csproj", "{A92818BE-4592-48E7-81AC-A4FCA40B2703}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiffStarterCSharpWizard", "vsix\LiffStarterCSharpWizard\LiffStarterCSharpWizard.csproj", "{A92818BE-4592-48E7-81AC-A4FCA40B2703}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

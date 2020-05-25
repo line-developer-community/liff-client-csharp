@@ -24,8 +24,8 @@ namespace BlazorLiffSpaVSIX
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(BlazorLiffSpaVSIXPackage.PackageGuidString)]
-    public sealed class BlazorLiffSpaVSIXPackage : AsyncPackage
+    [Guid(LiffStarterCSharpVSIXPackage.PackageGuidString)]
+    public sealed class LiffStarterCSharpVSIXPackage : AsyncPackage
     {
         /// <summary>
         /// BlazorWASMGitHubPagesVSIXPackage GUID string.
