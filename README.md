@@ -15,7 +15,7 @@ To check on the LINE app, use the following LIFF URL.
 
 ## Visual Studio Project Template
 
-The template for the [LIFF Starter](https://marketplace.visualstudio.com/items?itemName=pierre3.LiffStarterCSharp) project is now available. 
+The [LIFF Starter Project Template](https://marketplace.visualstudio.com/items?itemName=pierre3.LiffStarterCSharp) is now available. 
 With this template, you can quickly create an application like a demo site and deploy it to your GitHub page.
 
 - See: https://github.com/line-developer-community/liff-client-csharp/tree/master/vsix
