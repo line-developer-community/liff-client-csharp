@@ -13,10 +13,16 @@ https://line-developer-community.github.io/liff-client-csharp/
 To check on the LINE app, use the following LIFF URL.  
 [line://app/1653926279-Q4lOAB98](line://app/1653926279-Q4lOAB98)
 
+## Visual Studio Project Template
+
+The template for the [LIFF Starter](https://marketplace.visualstudio.com/items?itemName=pierre3.LiffStarterCSharp) project is now available. 
+With this template, you can quickly create an application like a demo site and deploy it to your GitHub page.
+
+- See: https://github.com/line-developer-community/liff-client-csharp/tree/master/vsix
 
 ## Usage
 Install from the NuGet Gallery.
-https://www.nuget.org/packages/LineDC.Liff/
+- https://www.nuget.org/packages/LineDC.Liff/
 
 
 Add the following script reference to the body of wwwroot/index.html.
