@@ -4,7 +4,7 @@ namespace LineDC.Liff.Data
 {
     public class Profile
     {
-        [JsonPropertyName("type")]
+        [JsonPropertyName("userId")]
         public string UserId { get; set; }
 
         [JsonPropertyName("displayName")]
